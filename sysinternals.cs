@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 
@@ -18,34 +17,36 @@ public class sysinternals
     static System.IntPtr NULL = IntPtr.Zero;
     static bool FALSE = false;
 
-    [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-    static extern bool CreateProcess(string lpApplicationName, string lpCommandLine, ref SECURITY_ATTRIBUTES lpProcessAttributes, ref SECURITY_ATTRIBUTES lpThreadAttributes, bool bInheritHandles, uint dwCreationFlags, IntPtr lpEnvironment, string lpCurrentDirectory, [In] ref STARTUPINFO lpStartupInfo, out PROCESS_INFORMATION lpProcessInformation);
+    [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)] 
+    public static extern 
+        bool CreateProcess(string lpApplicationName, string lpCommandLine, ref SECURITY_ATTRIBUTES lpProcessAttributes, ref SECURITY_ATTRIBUTES lpThreadAttributes, bool bInheritHandles, uint dwCreationFlags, IntPtr lpEnvironment, string lpCurrentDirectory, [In] ref STARTUPINFO lpStartupInfo, out PROCESS_INFORMATION lpProcessInformation);
+    
     [DllImport("ntdll.lib", CharSet = CharSet.Unicode, SetLastError = true)]
-    public static extern
+    private static extern
         int NtTerminateProcess(HANDLE ProcessHandle, NTSTATUS ExitStatus);
 
     [DllImport("ntdll.lib", CharSet = CharSet.Unicode, SetLastError = true)]
-    public static extern
+    private static extern
         int NtReadVirtualMemory(HANDLE ProcessHandle, PVOID BaseAddress, PVOID Buffer, ULONG NumberOfBytesToRead, PULONG NumberOfBytesReaded);
 
     [DllImport("ntdll.lib", CharSet = CharSet.Unicode, SetLastError = true)]
-    public static extern
+    private static extern
         int NtWriteVirtualMemory(HANDLE ProcessHandle, PVOID BaseAddress, PVOID Buffer, ULONG NumberOfBytesToWrite, PULONG NumberOfBytesWritten);
 
     [DllImport("ntdll.lib", CharSet = CharSet.Unicode, SetLastError = true)]
-    public static extern
+    private static extern
         int NtGetContextThread(HANDLE ThreadHandle, Context pContext);
 
     [DllImport("ntdll.lib", CharSet = CharSet.Unicode, SetLastError = true)]
-    public static extern
+    private static extern
         int NtSetContextThread(HANDLE ThreadHandle, Context pContext);
 
     [DllImport("ntdll.lib", CharSet = CharSet.Unicode, SetLastError = true)]
-    public static extern
+    private static extern
         int NtUnmapViewOfSection(HANDLE ProcessHandle, IntPtr BaseAddress);
 
     [DllImport("ntdll.lib", CharSet = CharSet.Unicode, SetLastError = true)]
-    public static extern
+    private static extern
         int NtResumeThread(HANDLE ThreadHandle, PULONG SuspendCount);
 }
 
